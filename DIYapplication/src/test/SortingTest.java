@@ -11,6 +11,11 @@ import model.Energy;
 import model.Project;
 import model.ProjectComparator;
 
+/**
+ * JUnit test cases for sorting features.
+ * 
+ * @author Matthew Chan
+ */
 public class SortingTest {
 
 	private final Project a = new Project("A", 10, 10000.0, null, Energy.MEDIUM, "Notes A");

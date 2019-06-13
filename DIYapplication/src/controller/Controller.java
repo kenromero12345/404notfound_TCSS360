@@ -7,18 +7,17 @@ import model.*;
 import view.*;
 
 /**
- * 
- * @author 
+ * The controller of this application.
  */
 public class Controller {
 
 	/**
-	 * The project view. 
+	 * The project view.
 	 */
 	private View myView;
 
-	/** 
-	 * The project model. 
+	/**
+	 * The project model.
 	 */
 	private Model myModel;
 
@@ -64,7 +63,7 @@ public class Controller {
 	public void addCreatedProject(final Project theProject) {
 		myModel.addProject(theProject);
 	}
-	
+
 	/**
 	 * Sets the save flag for prompting user to save to false
 	 */
@@ -97,7 +96,7 @@ public class Controller {
 	 * Calling this method will delete given project from project list.
 	 * 
 	 * @param theProject the project which will be delete.
-	 * @author
+	 * @author Matthew Chan
 	 * @author Ken Gil Romero
 	 */
 	public void deleteProject(final Project theProject) {
@@ -235,6 +234,8 @@ public class Controller {
 
 	/**
 	 * Sorts the project panels by name in alphabetical order.
+	 * 
+	 * @author Matthew Chan
 	 */
 	public void sortByName() {
 		myModel.getProjectList().getProjectList().sort(ProjectComparator.sortByName());
@@ -243,6 +244,8 @@ public class Controller {
 
 	/**
 	 * Sorts the project panels by name in reverse alphabetical order.
+	 * 
+	 * @author Matthew Chan
 	 */
 	public void sortByNameR() {
 		myModel.getProjectList().getProjectList().sort(ProjectComparator.sortByNameReversed());
@@ -251,6 +254,8 @@ public class Controller {
 
 	/**
 	 * Sorts the project panels by cost in ascending order.
+	 * 
+	 * @author Matthew Chan
 	 */
 	public void sortByCost() {
 		myModel.getProjectList().getProjectList().sort(ProjectComparator.sortByCost());
@@ -259,6 +264,8 @@ public class Controller {
 
 	/**
 	 * Sorts the project panels by cost in descending order.
+	 * 
+	 * @author Matthew Chan
 	 */
 	public void sortByCostR() {
 		myModel.getProjectList().getProjectList().sort(ProjectComparator.sortByCostReversed());
@@ -267,6 +274,8 @@ public class Controller {
 
 	/**
 	 * Sorts the project panels by duration in ascending order.
+	 * 
+	 * @author Matthew Chan
 	 */
 	public void sortByDuration() {
 		myModel.getProjectList().getProjectList().sort(ProjectComparator.sortByDuration());
@@ -275,6 +284,8 @@ public class Controller {
 
 	/**
 	 * Sorts the project panels by duration in descending order.
+	 * 
+	 * @author Matthew Chan
 	 */
 	public void sortByDurationR() {
 		myModel.getProjectList().getProjectList().sort(ProjectComparator.sortByDurationReversed());
@@ -283,6 +294,8 @@ public class Controller {
 
 	/**
 	 * Sorts the project panels by energy efficiency in normal order.
+	 * 
+	 * @author Matthew Chan
 	 */
 	public void sortByEnergy() {
 		myModel.getProjectList().getProjectList().sort(ProjectComparator.sortByEnergy());
@@ -291,6 +304,8 @@ public class Controller {
 
 	/**
 	 * Sorts the project panels by energy efficiency in reversed order.
+	 * 
+	 * @author Matthew Chan
 	 */
 	public void sortByEnergyR() {
 		myModel.getProjectList().getProjectList().sort(ProjectComparator.sortByEnergyReversed());
@@ -299,6 +314,8 @@ public class Controller {
 
 	/**
 	 * Sorts the project panels by cost vs benefit in normal order.
+	 * 
+	 * @author Matthew Chan
 	 */
 	public void sortByCalc() {
 		myModel.getProjectList().getProjectList().sort(ProjectComparator.sortByCalculation());
@@ -307,15 +324,16 @@ public class Controller {
 
 	/**
 	 * Sorts the project panels by cost vs benefit in reversed order.
+	 * 
+	 * @author Matthew Chan
 	 */
 	public void sortByCalcR() {
 		myModel.getProjectList().getProjectList().sort(ProjectComparator.sortByCalculationReversed());
 		myView.buildProjectPanels(myModel.getProjectList());
 	}
-	
+
 	/**
-	 * Changes the view's JFrame title to display the file that is currently
-	 * open.
+	 * Changes the view's JFrame title to display the file that is currently open.
 	 * 
 	 * @author Gordon McCreary
 	 * @param theFileName The name of the file that is currently open.

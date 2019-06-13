@@ -1,6 +1,7 @@
 package model;
+
 /**
- * Enum class for Energy. 
+ * Enum class for Energy.
  * 
  * @author Tammy Vo
  * @version May 28th, 2019
@@ -14,9 +15,10 @@ public enum Energy {
 	Energy(final int newValue) {
 		value = newValue;
 	}
-	
+
 	/**
-	 * Get enum value. 
+	 * Get enum value.
+	 * 
 	 * @author Tammy Vo
 	 * @param theValue
 	 * @return the energy value
@@ -24,9 +26,10 @@ public enum Energy {
 	public static Energy getEnumVal(final int theValue) {
 		return Energy.values()[theValue - 1];
 	}
-	
+
 	/**
 	 * Get value for energy.
+	 * 
 	 * @author Tammy Vo
 	 * @return value for energy.
 	 */

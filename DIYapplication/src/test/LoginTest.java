@@ -11,6 +11,7 @@ class LoginTest {
 
 	private Login a = new Login();
 	private Controller controller = new Controller(a);
+
 	@Test
 	void testSetNameAndSetEmailString() {
 		View view = new View(controller);

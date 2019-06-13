@@ -27,34 +27,32 @@ import model.Materials;
  * @version May 30, 2019
  */
 public class MaterialsWindow {
-	
+
 	/* The NewEditProjectWindow JFrame this was called from. */
 	private JFrame myHost;
-	
+
 	/* The materials. */
 	private Materials myMaterials;
-	
+
 	/* The JFrame for this window. */
 	private JFrame myFrame;
-	
+
 	/* The NewEditProjectWindow this was called from. */
 	private NewEditProjectWindow myWindow;
-	
+
 	/**
 	 * Material window constructor to display project materials.
 	 * 
 	 * @author Gordon McCreary
-	 * @param theHost The JFrame this is being called from.
+	 * @param theHost      The JFrame this is being called from.
 	 * @param theMaterials The Materials.
-	 * @param theWindow The NewEditProjectWindow this was called from.
+	 * @param theWindow    The NewEditProjectWindow this was called from.
 	 */
-	public MaterialsWindow(final JFrame theHost, final Materials theMaterials,
-										 final NewEditProjectWindow theWindow) {
+	public MaterialsWindow(final JFrame theHost, final Materials theMaterials, final NewEditProjectWindow theWindow) {
 		if (theMaterials.getMaterialMap().size() < 1) {
 			theHost.setEnabled(true);
-			JOptionPane.showMessageDialog(null,
-							  "There are no materials to view!", "No Materials",
-							  				   JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "There are no materials to view!", "No Materials",
+					JOptionPane.INFORMATION_MESSAGE);
 		} else {
 			myHost = theHost;
 			myHost.setEnabled(false);
@@ -62,7 +60,7 @@ public class MaterialsWindow {
 			myWindow = theWindow;
 			JPanel panel = new JPanel();
 			buildPanel(panel);
-			
+
 			// Finish up and show frame.
 			myFrame = new JFrame("Manage Materials");
 			myFrame.add(panel);
@@ -75,7 +73,7 @@ public class MaterialsWindow {
 			showFrame(myFrame);
 		}
 	}
-	
+
 	/**
 	 * Builds the panel by adding all the labels, fields, buttons, etc.
 	 * 
@@ -88,7 +86,7 @@ public class MaterialsWindow {
 			thePanel.add(new Mat(name, myMaterials.getMaterialMap().get(name)));
 		}
 	}
-	
+
 	/**
 	 * Shows the frame.
 	 * 
@@ -102,7 +100,7 @@ public class MaterialsWindow {
 		theFrame.setResizable(false);
 		theFrame.setVisible(true);
 	}
-	
+
 	/**
 	 * Mat class extends JPanel to display a material.
 	 * 
@@ -110,10 +108,10 @@ public class MaterialsWindow {
 	 * @version May 30, 2019
 	 */
 	class Mat extends JPanel {
-		
+
 		/* Default. */
 		private static final long serialVersionUID = 1L;
-		
+
 		/**
 		 * Mat constructor.
 		 * 
@@ -125,23 +123,20 @@ public class MaterialsWindow {
 			super(new BorderLayout());
 			JPanel tempPanel = new JPanel(new BorderLayout());
 			tempPanel.add(new JLabel(theName), BorderLayout.WEST);
-			tempPanel.add(new JLabel(String.format("$%.2f", theCost)),
-															 BorderLayout.EAST);
-			tempPanel.setPreferredSize(new Dimension(250,50));
+			tempPanel.add(new JLabel(String.format("$%.2f", theCost)), BorderLayout.EAST);
+			tempPanel.setPreferredSize(new Dimension(250, 50));
 			this.add(tempPanel, BorderLayout.WEST);
 			JButton delete = new JButton("X");
 			delete.setBackground(new Color(226, 61, 61));
 			delete.addActionListener(theEvent -> {
 				myMaterials.deleteMaterial(theName);
-				myFrame.dispatchEvent(new WindowEvent(myFrame,
-												   WindowEvent.WINDOW_CLOSING));
+				myFrame.dispatchEvent(new WindowEvent(myFrame, WindowEvent.WINDOW_CLOSING));
 				new MaterialsWindow(myHost, myMaterials, myWindow);
 				myWindow.updateMatLabel();
 			});
 			this.add(delete, BorderLayout.EAST);
 			this.setPreferredSize(new Dimension(300, 25));
-			this.setBorder(BorderFactory.createBevelBorder(
-														  BevelBorder.LOWERED));
+			this.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 		}
 	}
 }

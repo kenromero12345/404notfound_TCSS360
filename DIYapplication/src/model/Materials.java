@@ -31,7 +31,7 @@ public class Materials {
 	}
 
 	/**
-	 * Method to delete materials. 
+	 * Method to delete materials.
 	 * 
 	 * @author Tammy Vo
 	 * @param theName
@@ -52,18 +52,18 @@ public class Materials {
 
 	@Override
 	public String toString() {
-		if(!myMaterials.isEmpty()) {
+		if (!myMaterials.isEmpty()) {
 			DecimalFormat df = new DecimalFormat("0.00");
 			StringBuilder sb = new StringBuilder();
-			
-			for (Map.Entry<String, Double> entry : myMaterials.entrySet() ) {
+
+			for (Map.Entry<String, Double> entry : myMaterials.entrySet()) {
 				sb.append(entry.getKey() + " | Cost: $" + df.format(entry.getValue()));
 				sb.append("\n");
 			}
-			
+
 			sb.delete(sb.lastIndexOf("\n"), sb.length());
 			return sb.toString();
-			
+
 		} else {
 			return "No Materials is Found.";
 		}

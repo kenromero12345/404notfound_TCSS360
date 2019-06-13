@@ -35,58 +35,57 @@ import model.Project;
  * @version June 4, 2019
  */
 public class NewEditProjectWindow {
-	
+
 	/* The application controller. */
 	private Controller myController;
-	
+
 	/* The frame that is the main application. */
 	private View myApp;
-	
+
 	/* The frame that is this window. */
 	private JFrame myFrame;
-	
+
 	/* The project being edited. */
 	private Project myProject;
-	
+
 	/* Deep copy of project materials to be edited before submitting. */
 	private Materials myMaterials;
-	
+
 	/* True if creating a new project. */
 	private boolean myNewFlag;
-	
+
 	/* The text field for project name. */
 	private JTextField myNameField;
-	
+
 	/* The text field for project cost. */
 	private JTextField myCostField;
-	
+
 	/* The text field for project duration days. */
 	private JTextField myDaysField;
-	
+
 	/* The text field for project duration weeks. */
 	private JTextField myWeeksField;
-	
+
 	/* The combo box for project energy efficiency. */
 	private JComboBox<String> myEnergyField;
-	
+
 	/* The text area for project notes. */
 	private JTextArea myNotesField;
-	
+
 	/* JLabel for material amount. */
 	private JLabel myMaterialLabel;
-	
+
 	/* The JButton to submit the project information. */
 	private JButton mySubmitButton;
-	
+
 	/**
 	 * Constructor for the NewEditProjectWindow.
 	 * 
 	 * @author Gordon McCreary
 	 * @param theProject The project being edited.
-	 * @param theApp The main application that this window was called from.
+	 * @param theApp     The main application that this window was called from.
 	 */
-	public NewEditProjectWindow(final Project theProject,
-			   final View theApp, final Controller theController) {
+	public NewEditProjectWindow(final Project theProject, final View theApp, final Controller theController) {
 		theApp.setEnabled(false);
 		myController = theController;
 		myApp = theApp;
@@ -94,7 +93,7 @@ public class NewEditProjectWindow {
 		myMaterials = theProject.getMyMaterials();
 		JPanel mainPanel = new JPanel();
 		buildPanel(mainPanel);
-		
+
 		// Sets JFrame title and fields based on whether new or editing.
 		myNewFlag = "".equals(theProject.getMyName());
 		if (myNewFlag) {
@@ -102,16 +101,14 @@ public class NewEditProjectWindow {
 		} else {
 			myFrame = new JFrame("Edit Project");
 			myNameField.setText(theProject.getMyName());
-			myCostField.setText(myController.formatCost("" + 
-					   								   theProject.getMyCost()));
+			myCostField.setText(myController.formatCost("" + theProject.getMyCost()));
 			myDaysField.setText("" + (theProject.getMyDays() % 7));
 			myWeeksField.setText("" + (theProject.getMyDays() / 7));
-			myEnergyField.setSelectedIndex(
-									   theProject.getMyEnergy().getValue() - 1);
+			myEnergyField.setSelectedIndex(theProject.getMyEnergy().getValue() - 1);
 			myNotesField.setText(theProject.getMyNotes());
 			mySubmitButton.setText("Update");
 		}
-		
+
 		// Finish up and show frame.
 		myFrame.add(mainPanel);
 		myFrame.addWindowListener(new WindowAdapter() {
@@ -122,7 +119,7 @@ public class NewEditProjectWindow {
 		});
 		showFrame(myFrame);
 	}
-	
+
 	/**
 	 * Builds the panel by adding all the labels, fields, buttons, etc.
 	 * 
@@ -140,7 +137,7 @@ public class NewEditProjectWindow {
 		addSubmit(thePanel);
 		thePanel.setBorder(BorderFactory.createEmptyBorder(5, 25, 5, 25));
 	}
-	
+
 	/**
 	 * Adds the name JLabel and JTextField to the main JPanel.
 	 * 
@@ -150,25 +147,26 @@ public class NewEditProjectWindow {
 	private void addName(final JPanel thePanel) {
 		myNameField = new JTextField(15);
 		JPanel Name = new JPanel(new BorderLayout());
-		
+
 		// Formats name field once focus is lost.
-				myNameField.addFocusListener(new FocusListener() {
-					@Override
-					public void focusLost(FocusEvent theEvent) {
-						myNameField.setText(myController.formatLength(
-													myNameField.getText(), 20));
-					}
-					@Override
-					public void focusGained(FocusEvent e) {}
-				});
-		
-		//Panel layout.
+		myNameField.addFocusListener(new FocusListener() {
+			@Override
+			public void focusLost(FocusEvent theEvent) {
+				myNameField.setText(myController.formatLength(myNameField.getText(), 20));
+			}
+
+			@Override
+			public void focusGained(FocusEvent e) {
+			}
+		});
+
+		// Panel layout.
 		Name.add(new JLabel("Name:"), BorderLayout.WEST);
 		Name.add(myNameField, BorderLayout.EAST);
 		Name.setBorder(BorderFactory.createEmptyBorder(25, 0, 5, 0));
 		thePanel.add(Name);
 	}
-	
+
 	/**
 	 * Adds the cost JLabel and JTextField to the main JPanel.
 	 * 
@@ -178,28 +176,29 @@ public class NewEditProjectWindow {
 	private void addCost(final JPanel thePanel) {
 		myCostField = new JTextField("$", 10);
 		JPanel Cost = new JPanel(new BorderLayout());
-		
+
 		// Formats cost field once focus is lost.
 		myCostField.addFocusListener(new FocusListener() {
 			@Override
 			public void focusLost(FocusEvent theEvent) {
-				myCostField.setText(
-							    myController.formatCost(myCostField.getText()));
+				myCostField.setText(myController.formatCost(myCostField.getText()));
 			}
+
 			@Override
-			public void focusGained(FocusEvent e) {}
+			public void focusGained(FocusEvent e) {
+			}
 		});
-		
+
 		// Panel layout.
 		Cost.add(new JLabel("Total Cost:"), BorderLayout.WEST);
 		Cost.add(myCostField, BorderLayout.EAST);
 		Cost.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 30));
 		thePanel.add(Cost);
 	}
-	
+
 	/**
-	 * Adds the duration JLabel and JTextFields to the main JPanel, both for
-	 * Days and Weeks.
+	 * Adds the duration JLabel and JTextFields to the main JPanel, both for Days
+	 * and Weeks.
 	 * 
 	 * @author Gordon McCreary
 	 * @param thePanel The main JPanel.
@@ -213,34 +212,35 @@ public class NewEditProjectWindow {
 		JPanel DurEntries = new JPanel();
 		JPanel Days = new JPanel(new BorderLayout());
 		JPanel Weeks = new JPanel(new BorderLayout());
-		
+
 		// Formats days and weeks fields when focus is lost.
 		myWeeksField.addFocusListener(new FocusListener() {
 			@Override
 			public void focusLost(FocusEvent theEvent) {
-				myWeeksField.setText(
-								myController.formatInt(myWeeksField.getText()));
+				myWeeksField.setText(myController.formatInt(myWeeksField.getText()));
 			}
+
 			@Override
-			public void focusGained(FocusEvent e) {}
+			public void focusGained(FocusEvent e) {
+			}
 		});
 		myDaysField.addFocusListener(new FocusListener() {
 			@Override
 			public void focusLost(FocusEvent theEvent) {
-				int days = Integer.parseInt(0 +
-							     myController.formatInt(myDaysField.getText()));
-				int weeks = (days / 7) + Integer.parseInt(0 +
-						                                myWeeksField.getText());
+				int days = Integer.parseInt(0 + myController.formatInt(myDaysField.getText()));
+				int weeks = (days / 7) + Integer.parseInt(0 + myWeeksField.getText());
 				if (weeks > 9999999) {
 					weeks = 9999999;
 				}
 				myDaysField.setText("" + (days % 7));
 				myWeeksField.setText("" + weeks);
 			}
+
 			@Override
-			public void focusGained(FocusEvent e) {}
+			public void focusGained(FocusEvent e) {
+			}
 		});
-		
+
 		// Panel layout.
 		Days.add(new JLabel("     Days"), BorderLayout.EAST);
 		Days.add(myDaysField, BorderLayout.WEST);
@@ -255,7 +255,7 @@ public class NewEditProjectWindow {
 		Duration.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 25));
 		thePanel.add(Duration);
 	}
-	
+
 	/**
 	 * Adds the material JPanel consisting of the label, fields, and buttons.
 	 * 
@@ -270,44 +270,43 @@ public class NewEditProjectWindow {
 		JPanel southPanel = new JPanel();
 		JButton viewMats = new JButton("View");
 		JButton addMat = new JButton("+");
-		
+
 		// Formats material cost field once focus is lost.
 		materialCost.addFocusListener(new FocusListener() {
 			@Override
 			public void focusLost(FocusEvent theEvent) {
-				materialCost.setText(
-							 myController.formatCost(materialCost.getText()));
+				materialCost.setText(myController.formatCost(materialCost.getText()));
 			}
+
 			@Override
-			public void focusGained(FocusEvent e) {}
+			public void focusGained(FocusEvent e) {
+			}
 		});
-		
+
 		// Formats material name field once focus is lost.
 		materialName.addFocusListener(new FocusListener() {
 			@Override
 			public void focusLost(FocusEvent theEvent) {
-				materialName.setText(myController.formatLength(
-												 materialName.getText(), 12));
+				materialName.setText(myController.formatLength(materialName.getText(), 12));
 			}
+
 			@Override
-			public void focusGained(FocusEvent e) {}
+			public void focusGained(FocusEvent e) {
+			}
 		});
-		
+
 		// Adds action listener to view materials button.
-		viewMats.addActionListener(theEvent -> new MaterialsWindow(myFrame,
-															myMaterials, this));
-		
+		viewMats.addActionListener(theEvent -> new MaterialsWindow(myFrame, myMaterials, this));
+
 		// Adds action listener to add material button.
 		addMat.addActionListener(theEvent -> {
 			if ("".equals(materialName.getText())) {
-				JOptionPane.showMessageDialog(null,
-										   	  "You must enter a material name!",
-										   				 	 "Empty Name Field",
-										   	   JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "You must enter a material name!", "Empty Name Field",
+						JOptionPane.INFORMATION_MESSAGE);
 			} else {
 				try {
 					myMaterials.addMaterial(materialName.getText(),
-					   Double.parseDouble(materialCost.getText().substring(1)));
+							Double.parseDouble(materialCost.getText().substring(1)));
 				} catch (final NumberFormatException theException) {
 					myMaterials.addMaterial(materialName.getText(), 0);
 				}
@@ -316,8 +315,8 @@ public class NewEditProjectWindow {
 				updateMatLabel();
 			}
 		});
-		
-		//Panel layout.
+
+		// Panel layout.
 		southPanel.add(viewMats);
 		southPanel.add(myMaterialLabel);
 		Mats.add(new JLabel("Material name:     Cost:"), BorderLayout.NORTH);
@@ -329,16 +328,16 @@ public class NewEditProjectWindow {
 		updateMatLabel();
 		thePanel.add(Mats);
 	}
-	
+
 	/**
 	 * Update the label the displays the number of materials.
+	 * 
 	 * @author Gordon McCreary
 	 */
 	protected void updateMatLabel() {
-		myMaterialLabel.setText("Total Materials: "
-										 + myMaterials.getMaterialMap().size());
+		myMaterialLabel.setText("Total Materials: " + myMaterials.getMaterialMap().size());
 	}
-	
+
 	/**
 	 * Adds the energy JLabel and JComboBox to the main JPanel.
 	 * 
@@ -346,19 +345,16 @@ public class NewEditProjectWindow {
 	 * @param thePanel The main JPanel.
 	 */
 	private void addEnergyEfficiency(final JPanel thePanel) {
-		myEnergyField = new JComboBox<String>(
-										new String[] {"Low", "Medium", "High"});
+		myEnergyField = new JComboBox<String>(new String[] { "Low", "Medium", "High" });
 		JPanel EnergyEfficiency = new JPanel(new BorderLayout());
-		
+
 		// Panel layout.
-		EnergyEfficiency.add(new JLabel("Energy Efficiency:"),
-															 BorderLayout.WEST);
+		EnergyEfficiency.add(new JLabel("Energy Efficiency:"), BorderLayout.WEST);
 		EnergyEfficiency.add(myEnergyField, BorderLayout.EAST);
-		EnergyEfficiency.setBorder(
-								BorderFactory.createEmptyBorder(12, 0, 12, 15));
+		EnergyEfficiency.setBorder(BorderFactory.createEmptyBorder(12, 0, 12, 15));
 		thePanel.add(EnergyEfficiency);
 	}
-	
+
 	/**
 	 * Adds the notes JLabel and JTextArea to the main JPanel.
 	 * 
@@ -370,14 +366,14 @@ public class NewEditProjectWindow {
 		myNotesField.setLineWrap(true);
 		JPanel Notes = new JPanel(new BorderLayout());
 		JScrollPane scrollNotes = new JScrollPane(myNotesField);
-		
+
 		// Panel layout.
 		Notes.add(new JLabel("Notes:"), BorderLayout.WEST);
 		Notes.add(scrollNotes, BorderLayout.EAST);
 		Notes.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
 		thePanel.add(Notes);
 	}
-	
+
 	/**
 	 * Adds the submit JButton to the main JPanel.
 	 * 
@@ -387,21 +383,17 @@ public class NewEditProjectWindow {
 	 */
 	private void addSubmit(final JPanel thePanel) {
 		mySubmitButton = new JButton("Create");
-		
+
 		// Add action listener to submit button.
 		mySubmitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent theEvent) {
 				if ("".equals(myNameField.getText())) {
-					JOptionPane.showMessageDialog(null,
-											   "You must enter a project name!",
-											   				 "Empty Name Field",
-						   					   JOptionPane.INFORMATION_MESSAGE);
-				} else  if (myNewFlag && myController.projectExists(myNameField.getText())) {
-					JOptionPane.showMessageDialog(null,
-												 "Enter a unique project name!",
-												 	   "Duplicate Project Name",
-											   JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "You must enter a project name!", "Empty Name Field",
+							JOptionPane.INFORMATION_MESSAGE);
+				} else if (myNewFlag && myController.projectExists(myNameField.getText())) {
+					JOptionPane.showMessageDialog(null, "Enter a unique project name!", "Duplicate Project Name",
+							JOptionPane.INFORMATION_MESSAGE);
 				} else {
 					// If not empty or duplicate, submit information and close.
 					submitProject();
@@ -418,7 +410,7 @@ public class NewEditProjectWindow {
 				}
 			}
 		});
-		
+
 		// Panel layout.
 		final JPanel Submit = new JPanel(new BorderLayout());
 		Submit.add(mySubmitButton, BorderLayout.EAST);
@@ -426,30 +418,28 @@ public class NewEditProjectWindow {
 		Submit.setPreferredSize(new Dimension(200, 50));
 		thePanel.add(Submit);
 	}
-	
+
 	/**
-	 * Submits the project information to the project, updating all of its
-	 * fields to the inputed values.
+	 * Submits the project information to the project, updating all of its fields to
+	 * the inputed values.
+	 * 
 	 * @author Gordon McCreary
 	 */
 	private void submitProject() {
 		myProject.setMyName(myNameField.getText());
 		try {
-			myProject.setMyCost(Double.parseDouble(0 +
-										   myCostField.getText().substring(1)));
+			myProject.setMyCost(Double.parseDouble(0 + myCostField.getText().substring(1)));
 		} catch (final StringIndexOutOfBoundsException theException) {
 			myProject.setMyCost(0);
 		}
-		myProject.setMyDays(Integer.parseInt("0" + myDaysField.getText()) +
-				  		  (7 * Integer.parseInt("0" + myWeeksField.getText())));
-		myProject.setMyEnergy(Energy.valueOf(
-					 ((String) myEnergyField.getSelectedItem()).toUpperCase()));
+		myProject.setMyDays(
+				Integer.parseInt("0" + myDaysField.getText()) + (7 * Integer.parseInt("0" + myWeeksField.getText())));
+		myProject.setMyEnergy(Energy.valueOf(((String) myEnergyField.getSelectedItem()).toUpperCase()));
 		myProject.setMyNotes(myNotesField.getText());
 		myProject.setMyMaterials(myMaterials);
-		myProject.calculateCostBenefit(myProject.getMyDays(),
-								myProject.getMyCost(), myProject.getMyEnergy());
+		myProject.calculateCostBenefit(myProject.getMyDays(), myProject.getMyCost(), myProject.getMyEnergy());
 	}
-	
+
 	/**
 	 * Shows the frame.
 	 * 

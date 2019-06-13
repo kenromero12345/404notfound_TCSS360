@@ -33,6 +33,7 @@ public class Project {
 
 	/**
 	 * Create a project object.
+	 * 
 	 * @author Tammy Vo
 	 * @param theName      the name of the project.
 	 * @param theDays      the days to complete project.
@@ -54,6 +55,7 @@ public class Project {
 
 	/**
 	 * Get project name.
+	 * 
 	 * @author Tammy Vo
 	 * @return project name.
 	 */
@@ -63,6 +65,7 @@ public class Project {
 
 	/**
 	 * Set project name.
+	 * 
 	 * @author Tammy Vo
 	 * @param myName project name.
 	 */
@@ -72,6 +75,7 @@ public class Project {
 
 	/**
 	 * Get project days.
+	 * 
 	 * @author Tammy Vo
 	 * @return project days.
 	 */
@@ -81,6 +85,7 @@ public class Project {
 
 	/**
 	 * Set project days.
+	 * 
 	 * @author Tammy Vo
 	 * @param myDays project days.
 	 */
@@ -90,6 +95,7 @@ public class Project {
 
 	/**
 	 * Get project cost.
+	 * 
 	 * @author Tammy Vo
 	 * @return project cost.
 	 */
@@ -99,6 +105,7 @@ public class Project {
 
 	/**
 	 * Set project cost.
+	 * 
 	 * @author Tammy Vo
 	 * @param myCost project cost.
 	 */
@@ -108,6 +115,7 @@ public class Project {
 
 	/**
 	 * Get energy efficiency.
+	 * 
 	 * @author Tammy Vo
 	 * @return LOW, MED, or HIGH.
 	 */
@@ -117,6 +125,7 @@ public class Project {
 
 	/**
 	 * Set energy efficiency.
+	 * 
 	 * @author Tammy Vo
 	 * @param myEnergy project energy efficiency.
 	 */
@@ -126,6 +135,7 @@ public class Project {
 
 	/**
 	 * Get project notes.
+	 * 
 	 * @author Tammy Vo
 	 * @return project notes.
 	 */
@@ -135,6 +145,7 @@ public class Project {
 
 	/**
 	 * Set project notes.
+	 * 
 	 * @author Tammy Vo
 	 * @param myNotes project notes.
 	 */
@@ -155,7 +166,7 @@ public class Project {
 		}
 		return mats;
 	}
-	
+
 	/**
 	 * Set materials.
 	 * 
@@ -164,7 +175,7 @@ public class Project {
 	public void setMyMaterials(final Materials myMaterials) {
 		this.myMaterials = myMaterials;
 	}
-	
+
 	/**
 	 * Returns the value used to compare cost vs benefit.
 	 * 
@@ -174,26 +185,24 @@ public class Project {
 	public double getCostBenefit() {
 		return myCostBenefitVal;
 	}
-	
+
 	/**
-	 * Calculates a value to weigh cost vs benefit for user story 10, and saves
-	 * the value as a field.
-	 * Calculated as: (theDays + theCost) / theEnergy^2.
+	 * Calculates a value to weigh cost vs benefit for user story 10, and saves the
+	 * value as a field. Calculated as: (theDays + theCost) / theEnergy^2.
 	 * 
 	 * @author Gordon McCreary
-	 * @param theDays The number of days to complete the project.
-	 * @param theCost The amount of money to complete the project.
+	 * @param theDays   The number of days to complete the project.
+	 * @param theCost   The amount of money to complete the project.
 	 * @param theEnergy The energy efficiency of the project.
 	 */
-	public void calculateCostBenefit(final int theDays, final double theCost,
-													   final Energy theEnergy) {
+	public void calculateCostBenefit(final int theDays, final double theCost, final Energy theEnergy) {
 		myCostBenefitVal = (theDays + theCost) / Math.pow(theEnergy.getValue(), 2);
-		
+
 	}
 
 	@Override
 	public String toString() {
 		return "[" + myName + ", " + myDays + ", " + myCost + ", " + myEnergy + "]";
-		
+
 	}
 }

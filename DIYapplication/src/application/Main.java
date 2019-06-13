@@ -7,19 +7,22 @@ import controller.Controller;
 import view.*;
 
 /**
- * 
- * @author 
- *
+ * Main driver class for this application.
  */
 public final class Main {
 
-    /**
-     * Private constructor, to prevent instantiation of this class.
-     */
-    private Main() {
-        throw new IllegalStateException();
-    }
+	/**
+	 * Private constructor, to prevent instantiation of this class.
+	 */
+	private Main() {
+		throw new IllegalStateException();
+	}
 
+	/**
+	 * Main method.
+	 * 
+	 * @param theArgs command lone arguments, ignored
+	 */
 	public static void main(final String[] theArgs) {
 		try {
 			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
